@@ -1,8 +1,20 @@
 version: 2
 jobs:
   build:
-    docker:
+    bobby:
       - image: circleci/node:8.9
     steps:
       - checkout
       - run: echo "hello"
+  sally:
+    docker:
+      - image: circleci/node:8.9
+    steps:
+      - checkout
+      - run: echo "Double trouble"
+    workflows:
+      version: 2
+      bobby_sally:
+        jobs:
+          - bobby
+          - sally
